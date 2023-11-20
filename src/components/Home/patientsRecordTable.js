@@ -257,12 +257,12 @@ export default function PatientRecords() {
             onClick={handleExpandClick(id)}
             color="inherit"
           />,
-          <GridActionsCellItem
-            icon={<CloudDownloadIcon />}
-            label="Download Report"
-            onClick={handleDownloadClick(id)}
-            color="inherit"
-          />,
+          // <GridActionsCellItem
+          //   icon={<CloudDownloadIcon />}
+          //   label="Download Report"
+          //   onClick={handleDownloadClick(id)}
+          //   color="inherit"
+          // />,
         ];
       },
     },
