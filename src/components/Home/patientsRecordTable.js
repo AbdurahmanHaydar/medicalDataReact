@@ -172,6 +172,7 @@ export default function PatientRecords() {
       });
 
       toast.success("Saved!");
+      window.location.reload();
 
     } catch (error) {
       console.error('Error saving:', error);
