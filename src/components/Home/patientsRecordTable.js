@@ -25,10 +25,11 @@ import Search from './search';
 
 
 function EditToolbar(props) {
-  const { setRows, setRowModesModel, setUpdatePatient } = props;
+  const { setRows, setRowModesModel, setUpdatePatient, setCreatePatient } = props;
 
   const handleClick = () => {
     setUpdatePatient(false);
+    setCreatePatient(true);
     const id = randomId();
     setRows((oldRows) => [...oldRows, { id, name: '', contactInformation: '', gender: '', dateOfBirth: '', appointmentDate: '' }]);
     setRowModesModel((oldModel) => ({
@@ -49,6 +50,7 @@ function EditToolbar(props) {
 export default function PatientRecords() {
   const [rows, setRows] = useState([]);
   const [updatePatient, setUpdatePatient] = useState(false);
+  const [createPatient, setCreatePatient] = useState(false);
   const [rowModesModel, setRowModesModel] = useState({});
   const navigate = useNavigate();
 
@@ -141,50 +143,63 @@ export default function PatientRecords() {
   };
 
   const processRowUpdate = async (newRow) => {
-    console.log('newRowww', newRow);
-    const formData = new FormData();
-    formData.append('contactInformation', newRow?.contactInformation );
-    let dateOfBirth = new Date(newRow?.dateOfBirth);
-    let formattedDateOfBirth = dateOfBirth.getFullYear() + '-' + 
-                        String(dateOfBirth.getMonth() + 1).padStart(2, '0') + '-' + 
-                        String(dateOfBirth.getDate()).padStart(2, '0');
-    let appointmentDate = new Date(newRow?.appointmentDate);
-    let formattedAppointmentDate = appointmentDate.getFullYear() + '-' + 
-                        String(appointmentDate.getMonth() + 1).padStart(2, '0') + '-' + 
-                        String(appointmentDate.getDate()).padStart(2, '0');
-
-    formData.append('DateOfBirth', formattedDateOfBirth);
-    formData.append('AppointmentDate', formattedAppointmentDate);
-    formData.append('Gender', newRow?.gender);
-    formData.append('Name', newRow?.name);
-    formData.append('ContactInformation', newRow?.contactInformation);
-    formData.append('PatientID', newRow?.id);
-
-    const endpoint = updatePatient ? `update_patient/${newRow.id}/` : 'patients_create/';
-    try {
-      await axios({
-        method: updatePatient? 'put' : 'post',
-        url: `http://127.0.0.1:8000/api/${endpoint}`,
-        data: formData,
-        headers: { 
-          'Authorization': `Bearer ${localStorage.getItem('token')}`
-        }
-      });
-
-      toast.success("Saved!");
-      window.location.reload();
-
-    } catch (error) {
-      console.error('Error saving:', error);
-      toast.error('Error saving.');
-    }
     
-    const updatedRow = { ...newRow, isNew: false };
-    setRows(rows.map((row) => (row.id === newRow.id ? updatedRow : row)));
-    return updatedRow;
+      console.log('newRowww', newRow);
+      const formData = new FormData();
+      formData.append('contactInformation', newRow?.contactInformation );
+      let dateOfBirth = new Date(newRow?.dateOfBirth);
+      let formattedDateOfBirth = dateOfBirth.getFullYear() + '-' + 
+                          String(dateOfBirth.getMonth() + 1).padStart(2, '0') + '-' + 
+                          String(dateOfBirth.getDate()).padStart(2, '0');
+      let appointmentDate = new Date(newRow?.appointmentDate);
+      let formattedAppointmentDate = appointmentDate.getFullYear() + '-' + 
+                          String(appointmentDate.getMonth() + 1).padStart(2, '0') + '-' + 
+                          String(appointmentDate.getDate()).padStart(2, '0');
+
+      formData.append('DateOfBirth', formattedDateOfBirth);
+      formData.append('AppointmentDate', formattedAppointmentDate);
+      formData.append('Gender', newRow?.gender);
+      formData.append('Name', newRow?.name);
+      formData.append('ContactInformation', newRow?.contactInformation);
+      formData.append('PatientID', newRow?.id);
+
+      let endpoint = updatePatient ? `update_patient/${newRow.id}/` : 'patients_create/';
+      let method = 'put';
+
+      if(createPatient){ 
+        endpoint = 'patients_create/';
+        method = 'post';
+      }else{
+        endpoint = `update_patient/${newRow.id}/`;
+        method = 'put';
+      }
+
+      try {
+        await axios({
+          method: method,
+          url: `http://127.0.0.1:8000/api/${endpoint}`,
+          data: formData,
+          headers: { 
+            'Authorization': `Bearer ${localStorage.getItem('token')}`
+          }
+        });
+
+        toast.success("Saved!");
+        window.location.reload();
+
+      } catch (error) {
+        console.error('Error saving:', error);
+        toast.error('Error saving.');
+      }
+      
+      const updatedRow = { ...newRow, isNew: false };
+      setRows(rows.map((row) => (row.id === newRow.id ? updatedRow : row)));
+      return updatedRow;
   };
 
   const handleRowModesModelChange = (newRowModesModel) => {
+    console.log('ddddd newRowModesModel', newRowModesModel)
+    setUpdatePatient(false);
     setRowModesModel(newRowModesModel);
   };
 
@@ -305,7 +320,7 @@ export default function PatientRecords() {
           toolbar: EditToolbar,
         }}
         slotProps={{
-          toolbar: { setRows, setRowModesModel, setUpdatePatient },
+          toolbar: { setRows, setRowModesModel, setUpdatePatient, setCreatePatient },
         }}
       />
     </Box>
