@@ -4,7 +4,7 @@ This project was bootstrapped with [Create React App](https://github.com/faceboo
 
 This is the frontend for the medical records management system.
 
-# PREREQUISITES :
+## Guide :
 
 Backend needs to be running, go here for installtion instructions: https://github.com/AbdurahmanHaydar/medicalDataDjango
 
