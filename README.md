@@ -4,11 +4,15 @@ This project was bootstrapped with [Create React App](https://github.com/faceboo
 
 ## Summary on getting this repo running: 
 
+# PREREQUISITES :
+
+Backend needs to be running, go here for installtion instructions: https://github.com/AbdurahmanHaydar/medicalDataDjango
+
 Make sure you have Nodejs and Npm installed locally.
 
-$ git clone https://github.com/AbdurahmanHaydar/medicalDataReact.git
+$ `git clone https://github.com/AbdurahmanHaydar/medicalDataReact.git`
 
-$ cd medicalDataReact
+$ `cd medicalDataReact`
 
 $ `npm install`
 
