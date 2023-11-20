@@ -9,7 +9,7 @@ import SaveIcon from '@mui/icons-material/Save';
 import CancelIcon from '@mui/icons-material/Close';
 import PreviewIcon from '@mui/icons-material/Preview';
 import Typography from '@mui/material/Typography';
-import CloudDownloadIcon from '@mui/icons-material/CloudDownload';
+// import CloudDownloadIcon from '@mui/icons-material/CloudDownload';
 import {
   GridRowModes,
   DataGrid,
@@ -89,12 +89,9 @@ export default function PatientRecords() {
     setRowModesModel({ ...rowModesModel, [id]: { mode: GridRowModes.Edit } });
   };
 
-  const handleDownloadClick = (id) => () => {
-
-    console.log('download report...');
-
-    // setRowModesModel({ ...rowModesModel, [id]: { mode: GridRowModes.Edit } });
-  };
+  // const handleDownloadClick = (id) => () => {
+  //   console.log('download report...');
+  // };
 
   const handleSaveClick = (id) => () => {
     setRowModesModel({ ...rowModesModel, [id]: { mode: GridRowModes.View } });
