@@ -25,7 +25,7 @@ export default function Search(props) {
         value={searchValue}
         onChange={(event) => setSearchValue(event.target.value)}
         sx={{ width: '200px' }} 
-        label="Enter Search Value"
+        label="Enter Search Value, yyyy-mm-dd"
       />
       <Button variant="outlined" onClick={() => handleSearch(searchKey, searchValue)}>Search</Button>
     </Stack>
