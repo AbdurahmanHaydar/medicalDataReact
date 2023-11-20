@@ -6,7 +6,7 @@ This is the frontend for the medical records management system.
 
 ## Guide :
 
-Backend needs to be running, go here for installtion instructions: https://github.com/AbdurahmanHaydar/medicalDataDjango
+Backend needs to be running, go here for installation instructions: https://github.com/AbdurahmanHaydar/medicalDataDjango
 
 Make sure you have Nodejs and Npm installed locally.
 
