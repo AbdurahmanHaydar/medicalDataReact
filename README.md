@@ -6,11 +6,11 @@ This project was bootstrapped with [Create React App](https://github.com/faceboo
 
 Make sure you have Nodejs and Npm installed locally.
 
-https://github.com/AbdurahmanHaydar/medicalDataReact.git
+$ git clone https://github.com/AbdurahmanHaydar/medicalDataReact.git
 
-cd medicalDataReact
+$ cd medicalDataReact
 
-npm i
+$ `npm install`
 
 
 In the project directory, you can run:
